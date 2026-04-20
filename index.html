@@ -1,288 +1,149 @@
 <!DOCTYPE html>
+
 <html lang="pt-PT">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal Judicial - San Andreas</title>
+<title>Portal do Estado - San Andreas</title>
+
 <style>
-    :root {
-      --bg: #07111f;
-      --bg-2: #0b1b31;
-      --surface: rgba(10, 21, 38, 0.94);
-      --surface-soft: rgba(255,255,255,0.045);
-      --surface-strong: rgba(255,255,255,0.07);
-      --border: rgba(210, 224, 244, 0.14);
-      --border-strong: rgba(212, 175, 55, 0.35);
-      --text: #f8fbff;
-      --muted: #c8d4e6;
-      --muted-2: #8ea2bf;
-      --gold: #d4af37;
-      --gold-soft: rgba(212,175,55,0.12);
-      --blue-accent: #16355f;
-      --shadow: 0 24px 60px rgba(0,0,0,0.34);
-    }
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg,#07111f,#0b1b31);
+    color:white;
+}
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top, rgba(212,175,55,0.09), transparent 22%),
-        radial-gradient(circle at 85% 10%, rgba(255,255,255,0.05), transparent 18%),
-        linear-gradient(180deg, #040b16 0%, #091321 42%, #0c1728 100%);
-    }
+/* NAVBAR */
+nav {
+    background:#0b1b31;
+    padding:15px;
+    border-bottom:1px solid #d4af37;
+}
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(to right, rgba(255,255,255,0.018) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: linear-gradient(180deg, rgba(0,0,0,.35), transparent 80%);
-      opacity: .28;
-    }
+nav a {
+    color:#d4af37;
+    margin-right:20px;
+    text-decoration:none;
+    font-weight:bold;
+}
 
-    .container { width: min(1240px, calc(100% - 32px)); margin: 0 auto; }
+/* HERO */
+header {
+    text-align:center;
+    padding:40px;
+}
 
-    .topbar {
-      position: sticky; top: 0; z-index: 40;
-      background: rgba(4, 10, 20, 0.84);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.22);
-    }
+header img {
+    width:150px;
+}
 
-    .topbar-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 18px; padding: 14px 0;
-    }
+h1 {
+    font-size:40px;
+    margin-top:10px;
+}
 
-    .brand { display: flex; align-items: center; gap: 14px; }
-    .brand img {
-      width: 60px; height: 60px; border-radius: 50%; object-fit: cover;
-      border: 1px solid rgba(212,175,55,0.35);
-      background: rgba(255,255,255,0.04);
-      padding: 4px;
-      box-shadow: 0 0 28px rgba(212,175,55,0.14);
-    }
-    .brand h1 { margin: 0; font-size: 1.38rem; letter-spacing: .01em; }
-    .brand p { margin: 3px 0 0; color: var(--muted); font-size: .92rem; }
+/* BOTÕES */
+.menu {
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin:30px;
+}
 
-    .nav { display: flex; gap: 10px; flex-wrap: wrap; }
-    .nav a {
-      color: white; text-decoration: none; padding: 11px 17px; border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      border: 1px solid var(--border);
-      font-weight: 700; font-size: .92rem;
-      transition: .18s ease;
-    }
-    .nav a:hover {
-      background: linear-gradient(180deg, rgba(212,175,55,0.17), rgba(255,255,255,0.05));
-      border-color: var(--border-strong);
-      transform: translateY(-1px);
-    }
+.card {
+    background:#122844;
+    padding:20px;
+    border-radius:15px;
+    width:250px;
+    border:1px solid #d4af37;
+    transition:0.2s;
+}
 
-    .hero { padding: 52px 0 24px; }
-    .hero-card {
-      position: relative;
-      display: grid; grid-template-columns: 320px 1fr; gap: 28px; align-items: center;
-      background: linear-gradient(180deg, rgba(255,255,255,0.065), rgba(255,255,255,0.028));
-      border: 1px solid var(--border);
-      border-radius: 34px; padding: 32px; box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .hero-card::after {
-      content: "";
-      position: absolute; right: -80px; top: -80px; width: 220px; height: 220px;
-      background: radial-gradient(circle, rgba(212,175,55,0.18), transparent 65%);
-      filter: blur(10px);
-    }
-    .hero-image {
-      display: flex; justify-content: center; align-items: center;
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
-      border: 1px solid var(--border);
-      border-radius: 28px; padding: 22px;
-      min-height: 320px;
-    }
-    .hero-image img { max-width: 100%; width: 250px; height: auto; display: block; filter: drop-shadow(0 14px 24px rgba(0,0,0,0.35)); }
-    .eyebrow {
-      text-transform: uppercase; letter-spacing: .28em; font-size: .8rem; font-weight: 800; color: #dbe6f5;
-    }
-    .hero h2 { margin: 12px 0; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.04; }
-    .hero p { margin: 0; color: var(--muted); line-height: 1.78; font-size: 1rem; max-width: 760px; }
+.card:hover {
+    transform:scale(1.05);
+}
 
-    .quick-grid {
-      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px;
-    }
-    .quick-btn {
-      display: block; text-decoration: none; color: white;
-      background: linear-gradient(180deg, rgba(21,45,79,0.92), rgba(10,21,38,0.95));
-      border: 1px solid rgba(212,175,55,0.22); border-radius: 22px; padding: 20px;
-      box-shadow: var(--shadow); min-height: 150px;
-      transition: .18s ease;
-    }
-    .quick-btn:hover {
-      transform: translateY(-2px);
-      border-color: rgba(212,175,55,0.42);
-      background: linear-gradient(180deg, rgba(27,56,98,0.98), rgba(10,21,38,0.98));
-    }
-    .quick-btn strong {
-      display: block; font-size: 1rem; margin-bottom: 10px; color: #fff;
-    }
-    .quick-btn span { color: var(--muted); font-size: .92rem; line-height: 1.68; }
+.card a {
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:bold;
+}
 
-    .layout { display: grid; grid-template-columns: 300px 1fr; gap: 22px; padding: 20px 0 40px; }
-    .sidebar, .panel, .notice {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 28px; box-shadow: var(--shadow);
-    }
-    .sidebar { padding: 20px; position: sticky; top: 92px; height: fit-content; }
-    .sidebar h3 {
-      margin: 0 0 12px; font-size: .8rem; color: var(--muted-2); text-transform: uppercase; letter-spacing: .24em;
-    }
-    .sidebar a {
-      display: block; color: white; text-decoration: none; padding: 11px 12px; border-radius: 14px; margin-bottom: 6px;
-      transition: .18s ease;
-    }
-    .sidebar a:hover {
-      background: rgba(255,255,255,0.06);
-      color: #fff7df;
-    }
+/* SECÇÕES */
+section {
+    padding:30px;
+    max-width:900px;
+    margin:auto;
+}
 
-    .content { display: grid; gap: 22px; }
-    .panel { padding: 26px; }
-    .panel h3 { margin: 8px 0 0; font-size: 1.9rem; }
-    .kicker { text-transform: uppercase; letter-spacing: .24em; font-size: .8rem; color: #b6c7e3; font-weight: 800; }
-    .lead { color: var(--muted); line-height: 1.82; }
+h2 {
+    border-bottom:2px solid #d4af37;
+    padding-bottom:5px;
+}
 
-    .notice {
-      padding: 18px 20px;
-      background: linear-gradient(180deg, rgba(212,175,55,0.13), rgba(212,175,55,0.05));
-      border-color: rgba(212,175,55,0.32);
-    }
-    .notice strong { color: #f6df8b; display: block; margin-bottom: 6px; }
-    .notice p { margin: 0; color: #f8fafc; line-height: 1.72; }
+</style>
 
-    .doc-box {
-      margin-top: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.025));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px; padding: 20px;
-    }
-    .doc-box h4 {
-      margin: 0 0 12px; font-size: 1.06rem; color: #f4d36f; letter-spacing: .01em;
-    }
-    .doc-box p, .doc-box li { color: var(--muted); line-height: 1.84; }
-    .doc-box ul { margin: 10px 0 0; padding-left: 18px; }
-    .doc-box ol { margin: 10px 0 0; padding-left: 20px; }
-    .doc-box blockquote {
-      margin: 14px 0 0; padding: 16px 18px; border-left: 3px solid var(--gold);
-      background: rgba(255,255,255,0.04); color: #f8fafc; border-radius: 12px;
-    }
-
-    .roster-link {
-      display: inline-block; margin-top: 14px; text-decoration: none; color: #08101b; background: linear-gradient(180deg, #f2d16a, #d4af37);
-      font-weight: 800; padding: 12px 18px; border-radius: 999px; box-shadow: 0 12px 26px rgba(212,175,55,0.22);
-    }
-
-    footer { padding: 0 0 34px; }
-    .footer-box {
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 24px; padding: 18px; text-align: center; color: #cbd5e1;
-    }
-
-    @media (max-width: 1050px) {
-      .hero-card, .layout, .quick-grid { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-    }
-  </style>
 </head>
 <body>
 
 <nav>
-<a href="#constituição">Constituição</a>
-<a href="#portes">Portes</a>
-<a href="#manual">Manual Operacional</a>
+    <a href="#comunicados">Comunicados</a>
+    <a href="#manual">Manual</a>
+    <a href="#dispatch">Dispatch</a>
+    <a href="#roster">Roster</a>
 </nav>
 
-<section id="constituição">
-<h1>Constituição de San Andreas</h1>
-<div class="card">
-<h2>Princípios Fundamentais</h2>
-<p>San Andreas é um Estado soberano baseado na dignidade humana e vontade popular.</p>
-</div>
-<div class="card">
-<h2>Direitos e Deveres</h2>
-<p>Todos os cidadãos são iguais perante a lei.</p>
-</div>
-</section>
+<header>
+    <img src="badge-san-andreas.png">
+    <h1>Portal do Estado de San Andreas</h1>
+</header>
 
-<section id="portes">
-<h1>Portes e Licenças</h1>
+<div class="menu">
+
 <div class="card">
-<h2>Porte de Arma</h2>
-<p>Licença requerida por advogado a juiz. Limitado a 1 arma. Crimes revogam licença.</p>
+<a href="#comunicados">📢 Comunicados</a>
 </div>
+
 <div class="card">
-<h2>Licença de Caça</h2>
-<p>Zonas limitadas. Espécies protegidas proibidas. Violação implica pena.</p>
+<a href="#manual">📘 Livro de Recurso</a>
 </div>
+
 <div class="card">
-<h2>Licença de Pesca</h2>
-<p>Permitido apenas em zonas autorizadas.</p>
+<a href="#dispatch">📡 Procedimentos Dispatch</a>
 </div>
+
+<div class="card">
+<a href="#roster">📋 Roster do Departamento</a>
+</div>
+
+</div>
+
+<section id="comunicados">
+<h2>Comunicados</h2>
+<p>Área dedicada a avisos oficiais do departamento.</p>
 </section>
 
 <section id="manual">
-<h1>Manual de Operações</h1>
+<h2>Livro de Recurso e Manual de Procedimentos</h2>
+<p>Aqui ficará todo o manual completo do departamento.</p>
+</section>
 
-<div class="card">
-<h2>Patentes</h2>
-<p>Chefe (101), Capitão, Tenente, Sargento, Agente, Cadete.</p>
-</div>
+<section id="dispatch">
+<h2>Procedimentos Operacionais do Dispatch</h2>
+<p>Manual completo do despachante policial.</p>
+</section>
 
-<div class="card">
-<h2>Conceitos</h2>
-<p>Agente executa a lei. Detenção é investigação. Prisão ocorre após crime comprovado.</p>
-</div>
+<section id="roster">
+<h2>Roster do Departamento</h2>
 
-<div class="card">
-<h2>Uso da Força</h2>
-<p>Uso progressivo da força. Letal apenas em risco de vida.</p>
-</div>
+<p><b>⚠️ Aviso:</b> Neste roster encontra-se toda a informação importante do agente, incluindo códigos de comunicação, grelha de agentes e certificações.</p>
 
-<div class="card">
-<h2>Procedimentos</h2>
-<p>Leitura de direitos obrigatória. Transporte imediato para departamento.</p>
-</div>
-
-<div class="card">
-<h2>Comunicação</h2>
-<p>Comunicação clara e objetiva via rádio. Respeitar hierarquia.</p>
-</div>
-
-<div class="card">
-<h2>Perseguições</h2>
-<p>Organização por unidades. Comunicação constante com central.</p>
-</div>
-
-<div class="card">
-<h2>Assaltos e Negociação</h2>
-<p>Prioridade máxima: vida dos reféns. Negociação sempre preferida.</p>
-</div>
-
-<div class="card">
-<h2>Conduta</h2>
-<p>Respeitar superiores, seguir ordens e representar o departamento com profissionalismo.</p>
-</div>
-
-<div class="card">
-<h2>Direitos Civis</h2>
-<p>Direito ao silêncio garantido.</p>
-</div>
+<a href="https://docs.google.com/spreadsheets/d/1PgNg13O96UKXtL_RJbnGkKme0FMIX6pZ/edit?usp=sharing" target="_blank">
+Abrir Roster
+</a>
 
 </section>
 

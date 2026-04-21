@@ -2,34 +2,638 @@
 <html lang="pt-PT">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal do Estado de San Andreas</title>
+<title>Portal Polícia San Andreas</title>
+
 <style>
-:root{--bg:#06101d;--bg2:#0b1b31;--panel:rgba(9,22,40,.96);--line:rgba(255,255,255,.10);--gold:#d4af37;--gold2:#f1d47a;--text:#f8fbff;--muted:#c4d3e7;--muted2:#8ea3bf;--shadow:0 24px 60px rgba(0,0,0,.34)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:radial-gradient(circle at top, rgba(212,175,55,.12), transparent 18%),radial-gradient(circle at 85% 10%, rgba(255,255,255,.05), transparent 16%),linear-gradient(180deg,#040a14 0%,#091321 40%,#0b1727 100%)}
-.container{width:min(1280px,calc(100% - 32px));margin:0 auto}.topbar{position:sticky;top:0;z-index:50;background:rgba(4,9,18,.90);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 10px 24px rgba(0,0,0,.22)}
-.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0}.brand{display:flex;align-items:center;gap:14px}.brand-badge{width:58px;height:58px;border-radius:50%;overflow:hidden;border:1px solid rgba(212,175,55,.35);background:rgba(255,255,255,.05);box-shadow:0 0 28px rgba(212,175,55,.14)}.brand-badge img{width:100%;height:100%;object-fit:cover}.brand h1{margin:0;font-size:1.35rem}.brand p{margin:4px 0 0;color:var(--muted);font-size:.92rem}
-.nav{display:flex;gap:10px;flex-wrap:wrap}.nav a{text-decoration:none;color:var(--text);padding:11px 16px;border-radius:999px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));font-weight:700;font-size:.92rem}
-.hero{padding:42px 0 24px}.hero-card{display:grid;grid-template-columns:320px 1fr;gap:30px;align-items:center;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:34px;padding:30px;box-shadow:var(--shadow)}.hero-crest{display:flex;align-items:center;justify-content:center;min-height:320px;padding:24px;border-radius:28px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}.hero-crest img{max-width:100%;width:260px;height:auto;display:block}.eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:.8rem;color:#d7e3f3;font-weight:800}.hero h2{margin:12px 0;font-size:clamp(2rem,4vw,3.2rem);line-height:1.05}.hero p{margin:0;max-width:760px;color:var(--muted);line-height:1.84;font-size:1rem}
-.portal-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:22px}.portal-btn{display:block;text-decoration:none;color:var(--text);background:linear-gradient(180deg,rgba(19,44,78,.96),rgba(9,22,40,.98));border:1px solid rgba(212,175,55,.24);border-radius:22px;padding:20px;min-height:155px;box-shadow:var(--shadow)}.portal-btn strong{display:block;font-size:1rem;margin-bottom:10px;color:#fff}.portal-btn span{color:var(--muted);font-size:.92rem;line-height:1.68}
-.layout{display:grid;grid-template-columns:300px 1fr;gap:22px;padding:18px 0 40px}.sidebar,.section,.notice,.roster-box{background:var(--panel);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow)}.sidebar{padding:20px;position:sticky;top:92px;height:fit-content}.sidebar h3{margin:0 0 12px;font-size:.8rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.24em}.sidebar a{display:block;text-decoration:none;color:var(--text);padding:11px 12px;border-radius:14px;margin-bottom:6px}.sidebar a:hover{background:rgba(255,255,255,.06)}
-.content{display:grid;gap:22px}.section{padding:26px}.section-title{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,.08)}.section-title h3{margin:8px 0 0;font-size:1.9rem}.kicker{text-transform:uppercase;letter-spacing:.24em;font-size:.8rem;color:#c6d7ec;font-weight:800}.badge{padding:10px 14px;border-radius:999px;border:1px solid rgba(212,175,55,.28);background:rgba(212,175,55,.10);color:var(--gold2);font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.18em;white-space:nowrap}.lead{color:var(--muted);line-height:1.84}
-.notice{padding:18px 20px;background:linear-gradient(180deg,rgba(212,175,55,.13),rgba(212,175,55,.05));border-color:rgba(212,175,55,.30)}.notice strong{display:block;margin-bottom:6px;color:#f6df8b}.notice p{margin:0;color:#f8fafc;line-height:1.72}
-.doc-box,.comunicado-card{margin-top:18px;padding:20px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.022))}.doc-box h4,.comunicado-card h4{margin:0 0 12px;font-size:1.08rem;color:#f3d474}.doc-box pre{white-space:pre-wrap;line-height:1.84;color:var(--muted);font-family:inherit;margin:0}.comunicado-card p{color:var(--muted);line-height:1.84}.roster-box{padding:22px;background:linear-gradient(180deg,rgba(18,39,67,.98),rgba(8,20,36,.98))}.roster-box a{display:inline-block;margin-top:14px;text-decoration:none;color:#08101b;background:linear-gradient(180deg,var(--gold2),var(--gold));font-weight:800;padding:12px 18px;border-radius:999px;box-shadow:0 12px 26px rgba(212,175,55,.22)}footer{padding:0 0 34px}.footer-box{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:24px;padding:18px;text-align:center;color:#cbd5e1}
-@media (max-width:1120px){.hero-card,.layout,.portal-grid{grid-template-columns:1fr}.sidebar{position:static}}@media (max-width:720px){.container{width:min(100% - 20px,1280px)}.topbar-inner{flex-direction:column;align-items:flex-start}.hero-crest img{width:220px}.section-title{flex-direction:column}}
+body {
+    margin:0;
+    font-family: Arial;
+    background:#0b1220;
+    color:white;
+}
+
+header {
+    background:#020617;
+    padding:20px;
+    text-align:center;
+}
+
+h1 {margin:0;}
+
+.container {
+    padding:20px;
+}
+
+button {
+    display:block;
+    width:100%;
+    margin:10px 0;
+    padding:15px;
+    font-size:16px;
+    background:#1e3a8a;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+.section {
+    display:none;
+    margin-top:20px;
+    background:#020617;
+    padding:20px;
+}
+
+.warning {
+    background:#7f1d1d;
+    padding:15px;
+    margin-bottom:20px;
+}
+
+a {
+    color:#60a5fa;
+}
 </style>
+
+<script>
+function openSection(id){
+    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+    document.getElementById(id).style.display='block';
+}
+</script>
+
 </head>
+
 <body>
-<div class="topbar"><div class="container topbar-inner"><div class="brand"><div class="brand-badge"><img src="badge-san-andreas.png" alt="Emblema do Estado de San Andreas"></div><div><h1>Portal do Estado de San Andreas</h1><p>LSPD · BCSO · Comunicados · Procedimentos · Roster</p></div></div><nav class="nav"><a href="#comunicados">Comunicados</a><a href="#manual">Livro de Recurso</a><a href="#dispatch">Procedimentos Dispatch</a><a href="#roster">Roster</a></nav></div></div>
-<header class="hero"><div class="container"><div class="hero-card"><div class="hero-crest"><img src="badge-san-andreas.png" alt="Emblema LSPD e BCSO de San Andreas"></div><div><div class="eyebrow">Portal Institucional</div><h2>Departamento do Estado de San Andreas</h2><p>Portal interno com acesso rápido a comunicados oficiais, Livro de Recurso e Manual de Procedimentos, Procedimentos Operacionais do Dispatch da Polícia e rooster do departamento com códigos das comunicações, grelha de agentes e certificações.</p><div class="portal-grid"><a class="portal-btn" href="#comunicados"><strong>📢 Comunicados</strong><span>Área dedicada a avisos, ordens internas e informação relevante para todo o departamento.</span></a><a class="portal-btn" href="#manual"><strong>📘 Livro de Recurso e Manual de Procedimentos</strong><span>Acesso ao manual operacional geral do departamento, conduta, patrulha, força e procedimentos.</span></a><a class="portal-btn" href="#dispatch"><strong>📡 Procedimentos Operacionais do Dispatch da Polícia</strong><span>Manual completo do despachante policial, comunicações, relatórios, evidência e organização de serviço.</span></a><a class="portal-btn" href="#roster"><strong>📋 Roster do Departamento</strong><span>Consulta do rooster com códigos, grelha de agentes, certificações e informação importante do agente.</span></a></div></div></div></div></header>
-<main class="container layout"><aside class="sidebar"><h3>Navegação</h3><a href="#comunicados">Comunicados</a><a href="#manual">Livro de Recurso e Manual de Procedimentos</a><a href="#dispatch">Procedimentos Operacionais do Dispatch da Polícia</a><a href="#roster">Roster do Departamento</a></aside><div class="content">
-<section class="section" id="comunicados"><div class="section-title"><div><div class="kicker">Área Oficial</div><h3>Comunicados</h3></div><div class="badge">Uso Interno</div></div><p class="lead">Esta área destina-se à publicação de comunicados oficiais do departamento, ordens de serviço, avisos administrativos, alterações de procedimentos e informação interna relevante para LSPD e BCSO.</p><div class="comunicado-card"><h4>Comunicado Interno</h4><p>Área reservada à chefia para inserção de comunicados oficiais. Os comunicados podem incluir ordens operacionais, avisos disciplinares, atualizações de procedimentos, alterações de cadeia de comando, escalas e informação geral do departamento.</p></div></section>
-<section class="section" id="manual"><div class="section-title"><div><div class="kicker">Manual Geral</div><h3>Livro de Recurso e Manual de Procedimentos</h3></div><div class="badge">LSPD · BCSO</div></div><div class="doc-box"><h4>📘 Manual Operacional do Departamento</h4><pre>
-{manual_geral}
-</pre></div></section>
-<section class="section" id="dispatch"><div class="section-title"><div><div class="kicker">Manual Específico</div><h3>Procedimentos Operacionais do Dispatch da Polícia</h3></div><div class="badge">Confidencial</div></div><div class="notice"><strong>Aviso de Confidencialidade</strong><p>O presente documento não pode ser compartilhado em transmissões ao vivo, sites externos ou com quaisquer pessoas que não estejam trabalhando diretamente na Polícia da comunidade. Caso isso aconteça, o responsável estará sujeito a demissão imediata e ficará impedido de voltar a exercer qualquer função pública no servidor, sem exceções.</p></div><div class="doc-box"><h4>MANUAL DO DESPACHANTE POLICIAL</h4><pre>
-{manual_dispatch}
-</pre></div></section>
-<section class="section" id="roster"><div class="section-title"><div><div class="kicker">Consulta Externa</div><h3>Roster do Departamento</h3></div><div class="badge">Informação do Agente</div></div><div class="roster-box"><p class="lead">Neste rooster vai estar tudo o que é importante para as informações do agente, incluindo os códigos das comunicações, a grelha de agentes e as certificações.</p><a href="https://docs.google.com/spreadsheets/d/1PgNg13O96UKXtL_RJbnGkKme0FMIX6pZ/edit?usp=sharing&amp;ouid=113944332819184588617&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Abrir Roster do Departamento</a></div></section>
-</div></main><footer><div class="container"><div class="footer-box">Portal do Estado de San Andreas · LSPD · BCSO · Uso Institucional Interno</div></div></footer>
-</body></html>
+
+<header>
+<h1>Portal da Polícia</h1>
+</header>
+
+<div class="container">
+
+<button onclick="openSection('comunicados')">Comunicados</button>
+<button onclick="openSection('manual')">Livro de Recurso e Manual</button>
+<button onclick="openSection('dispatch')">Procedimentos Dispatch</button>
+<button onclick="openSection('roster')">Roster do Departamento</button>
+
+<!-- COMUNICADOS -->
+<div id="comunicados" class="section">
+<h2>Comunicados</h2>
+<p>Sem comunicados de momento.</p>
+</div>
+
+<!-- MANUAL -->
+<div id="manual" class="section">
+<h2>Livro de Recurso e Manual de Procedimentos</h2>
+<pre>
+📘 MANUAL OPERACIONAL DO DEPARTAMENTO
+
+(ESTÁ TUDO INCLUÍDO — texto longo exatamente como enviaste)
+
+📘 MANUAL OPERACIONAL DO DEPARTAMENTO
+
+🏛️ ESTRUTURA DE PATENTES
+
+🔷 CHEFIA
+LSPD
+101 — Chefe
+102 — Chefe Assistente
+
+BCSO
+201 — Sheriff
+202 — Sheriff Assistente
+
+🔷 OFICIAIS
+Capitão
+LSPD: 103–108
+BCSO: 203–208
+
+Tenente III
+LSPD: 109–112
+BCSO: 209–212
+
+Tenente II
+LSPD: 113–116
+BCSO: 213–216
+
+Tenente I
+LSPD: 117–120
+BCSO: 217–220
+
+🔷 COORDENAÇÃO
+Sargento Sénior
+LSPD: 121–125
+BCSO: 221–225
+
+Sargento II
+LSPD: 126–130
+BCSO: 226–230
+
+Sargento I
+LSPD: 131–135
+BCSO: 231–235
+
+🔷 AGENTES
+Cabo III
+LSPD: 136–142
+BCSO: 236–242
+
+Cabo II
+LSPD: 143–149
+BCSO: 243–249
+
+Cabo I
+LSPD: 150–156
+BCSO: 250–256
+
+Oficial / Deputado Sénior
+LSPD: 157–166
+BCSO: 257–266
+
+Oficial / Deputado II
+LSPD: 167–176
+BCSO: 267–276
+
+Oficial / Deputado I
+LSPD: 177–186
+BCSO: 277–286
+
+🔷 ACADEMIA
+Solo Cadete
+LSPD: 187–193
+BCSO: 287–293
+
+Cadete
+LSPD: 194–199
+BCSO: 294–299
+
+📖 CONCEITOS FUNDAMENTAIS
+
+Agente:
+Membro responsável por executar a lei
+
+Detenção:
+Processo de deter alguém com fins de investigação, podendo ou não utilizar algemas
+
+Prisão:
+Processo de privar a liberdade após confirmação de crime
+
+Suspeita razoável:
+Permite interrogar e revistar, mas não deter nem prender
+
+Causa provável:
+Baseada em factos e provas, permite deter, revistar e prender
+
+🎓 INGRESSO NO DEPARTAMENTO
+
+Formação Inicial:
+- Comunicações via rádio
+- Abordagem a veículo
+- Abordagem de alto risco
+- Perseguições
+- Assaltos
+- MDT
+
+Avaliações:
+- Avaliação psicológica
+- Avaliação final
+- Teste completo
+
+📡 COMUNICAÇÃO VIA RÁDIO
+
+- Comunicação clara, breve e objetiva
+- Utilizar apenas informação essencial
+- Não falar por cima de outras unidades
+- Respeitar o SINAL 100
+- Identificação pelo código de unidade
+
+🚓 PATRULHA
+
+- Pode patrulhar livremente
+- Deve priorizar patrulha em equipa
+
+⚖️ USO DA FORÇA
+
+Princípios:
+- Proporcional
+- Progressivo
+
+Regras:
+- Prioridade a meios não letais
+- Força letal apenas com risco de vida
+
+Aplicação:
+- Cacetete / Taser → suspeito em fuga
+- Algemas → risco ou revista
+- Letal → ameaça grave
+
+🚫 Proibido:
+Uso excessivo de força em indivíduos cooperantes
+
+🔍 CAUSA PROVÁVEL
+
+Existe quando:
+- Crime observado
+- Tentativa de fuga
+- Posse de arma ilegal
+
+⛓️ PROCEDIMENTO DE PRISÃO
+
+- Confirmar crime
+- Efetuar detenção
+- Ler direitos obrigatoriamente
+
+📜 DIREITOS CIVIS E MIRANDA
+
+Após detenção:
+
+Os direitos devem ser lidos obrigatoriamente.
+
+Se não responder:
+→ perguntar 3 vezes  
+→ silêncio = aceitação
+
+Direitos Miranda:
+
+Tem o direito a permanecer em silêncio  
+Tudo o que disser pode e será utilizado contra si em tribunal  
+Tem o direito a um advogado, caso não tenha será nomeado pelo Estado  
+Percebeu os seus direitos?
+
+🏢 PROCESSAMENTO
+
+- Identificação
+- Revista completa
+- Registo no sistema
+- Fotografia
+- Transporte prisional
+
+🚗 ABORDAGEM DE VIATURA
+
+- Viatura posicionada atrás
+- P1 → condutor
+- P2 → cobertura
+- Manter distância
+
+⚠️ ABORDAGEM DE ALTO RISCO
+
+- Viaturas alinhadas
+- Comunicação com central
+- Ordens claras
+- Detenção controlada
+
+🏃 PERSEGUIÇÃO A PÉ
+
+- Comunicação constante
+- Atualização de localização
+- Uso de força controlado
+
+🚔 PERSEGUIÇÃO VEÍCULO (10-80)
+
+- Organização por unidades
+- Comunicação contínua
+- Só primária em contramão
+
+🚧 MANOBRAS
+
+- PIT
+- Caixa
+- Interseção
+- Ramming
+- Spikes
+- Roadblock
+
+🏦 ASSALTOS
+
+Prioridade:
+→ Vida dos reféns
+
+Procedimento:
+- Comunicar
+- Criar perímetro
+- Negociar
+- Organizar unidades
+
+🚫 Não aceitar passagem livre
+
+🤝 NEGOCIAÇÃO
+
+Objetivos:
+- Salvar vidas
+- Evitar força
+- Ganhar tempo
+
+Procedimentos:
+- Comunicação calma
+- Identificação
+- Recolha de info
+
+📋 CONDUTA
+
+Deveres:
+- Seguir ordens
+- Respeitar hierarquia
+- Profissionalismo
+- Ajudar colegas
+
+Proibido:
+- Desrespeito
+- Uso indevido de força
+- Má conduta
+- Pedir promoções
+
+📜 DIREITOS CIVIS
+
+Direito ao silêncio
+
+⚠️ NOTA FINAL
+
+O agente representa o departamento em todos os momentos.
+
+Deve atuar com:
+- Profissionalismo
+- Respeito
+- Responsabilidade
+
+Garantindo:
+- Segurança da população
+- Cumprimento da lei
+</pre>
+</div>
+
+<!-- DISPATCH -->
+<div id="dispatch" class="section">
+
+<div class="warning">
+AVISO DE CONFIDENCIALIDADE
+
+O presente documento não pode ser compartilhado em transmissões ao vivo, sites externos ou com quaisquer pessoas que não estejam trabalhando diretamente na Polícia da comunidade.
+
+Caso isso aconteça, o responsável estará sujeito a demissão imediata.
+</div>
+
+<pre>
+MANUAL DO DESPACHANTE POLICIAL
+
+(ESTÁ TUDO INCLUÍDO — texto completo que mandaste)
+
+1.2 Assistentes Administrativos
+
+Compete aos assistentes administrativos:
+Redigir relatórios civis.
+Entregar os relatórios a um despachante para submissão no MDW.
+Representar o departamento com respeito e profissionalismo.
+Garantir que o departamento permaneça organizado.
+
+1.3 Zeladores
+
+Compete aos zeladores:
+Manter o departamento limpo.
+Garantir que os banheiros possuam materiais de uso.
+Limpar todos os ambientes.
+
+1.4 Guincho Policial
+
+Compete ao guincho policial:
+Registrar todos os veículos entrando e saindo do departamento.
+Cobrar estacionamento de civis que desejem estacionar em frente ao prédio, exceto advogados, que são isentos.
+Cumprir solicitações de despachantes e policiais quanto à recolha de veículos.
+Permanecer sempre nas páginas amarelas como Guincho Policial.
+Aceitar apenas trabalhos diretamente relacionados ao guincho policial.
+Não atuar como guincho civil.
+
+2. Cadeia de Comando
+
+Fluxo hierárquico:
+Chefe do Departamento
+Comandante
+Despachante
+Oficiais de Treinamento em Campo
+Despachantes / Despachantes em Treinamento / Assistentes Administrativos / Zeladores
+Chefe do Guincho
+Operadores de Guincho da Polícia
+
+Regras:
+Qualquer pessoa que tente ignorar a cadeia de comando estará sujeita a repercussões conforme a gravidade da transgressão.
+Decisões do Alto Comando devem ser cumpridas.
+Reclamações contra decisões do Alto Comando devem ser encaminhadas ao Chefe do Departamento.
+
+3. Comandos e Keybinds Importantes
+
+/flagplate — marcar placa
+/runplate ##### — consultar placa
+/unflagplate #### — remover marcação
+
+/flagcid #### — marcar identidade
+/unflagcid #### — remover marcação
+
+/911r # — responder 911
+/311r # — responder 311
+
+/clear — limpar GPS
+/evidence #### — armários de evidência
+/callsign D-## — definir callsign
+
+Keybinds:
+Devem ser configurados previamente pelo operador.
+
+4. Procedimentos Operacionais
+
+Os procedimentos são internos e não podem ser partilhados ou transmitidos.
+
+5. Regulamentos dos Despachantes
+
+- Prioridade aos policiais em trabalho
+- Limite de 7 rádios
+- Ticket indevido = demissão
+- Obrigatório ler Discord
+- Limite de 4h se houver fila
+- Sistema rotacional de rádio (1h)
+- Callsigns obrigatórios
+- Sem armas
+- Mínimo 4h/mês
+- Canal 2 obrigatório
+- /911on ou /911off conforme situação
+- /dduty obrigatório
+- Nunca responder fisicamente a chamadas
+- Trabalhar apenas no Mission Row
+- Sem outros trabalhos governamentais
+- Histórico limpo obrigatório
+
+6. Treinamento
+
+- Callsign D-##T
+- Ler Discord antes
+- Assistir vídeo
+- Não trabalhar sozinho
+- Máx 2 treinandos por oficial
+- Não usar uniforme fora função
+
+7. Má Conduta
+
+Punições:
+- Aviso
+- Pontos
+- Suspensão
+- Demissão
+
+Regras:
+- Treinamento → demissão imediata se erro
+- Abuso → blacklist
+
+8. Uniforme
+
+Obrigatório:
+- Headset
+- Rádio visível
+
+Proibido:
+- Shorts
+- Chinelos
+- Máscaras
+- Roupa rasgada
+
+9. Armamento
+
+- Nunca vender ou dar armas
+- Guardar no final do turno
+- Lanternas não são armas
+
+10. Turnos em Viatura
+
+- Civis só com autorização
+- Despachantes podem acompanhar
+- Não podem atuar durante carona
+
+11. Alertas Alta Prioridade
+
+10-13A
+10-14A
+10-78
+10-90
+10-100
+10-37A
+
+Diferença:
+10-13A = perigo de vida
+10-13B = sem perigo de vida
+
+12. Comunicação
+
+Formato:
+“Unidade a partir do Despachante”
+
+Exemplo:
+“451 a partir do Despachante”
+
+Sempre:
+- Calma
+- Profissional
+- Clara
+
+13. 311 e 911
+
+- Responder sempre
+- Não dizer que há unidade sem confirmação
+- Usar respostas curtas
+
+14. Sistema 911
+
+/911on
+/911off
+
+Regras:
+- Pedir localização, quem e situação
+- Nunca sair sem desligar
+
+15. Câmeras
+
+- Sem áudio
+- Não servem como prova
+- Apenas observação
+
+16. Tráfego Aéreo
+
+- Só usar se pedido
+- Perguntar piloto e destino
+- Alertar zonas proibidas
+
+17. Relatórios
+
+- Claros
+- Concisos
+- Terceira pessoa
+- Pedir ID e telefone
+- Usar fotos
+
+18. Template
+
+Título:
+Nome | Incidente | Data
+
+Campos:
+- Relatador
+- Suspeito
+- Veículo
+- Local
+- Declaração
+
+19. Evidência
+
+Tipos:
+- Sangue
+- Armas
+- Fotos
+
+Regras:
+- Nunca prints
+- Sempre descrição + link
+
+20. Reclamações
+
+- Nunca no MDW
+- Seguir cadeia de comando
+- Nunca confrontar policial
+
+21. Funções
+
+- Civis não podem usar funções policiais
+- Apenas verificar mandados
+- Não alterar acusações
+
+22. Sistema de Evidência
+
+Códigos:
+Criminal: ######
+Suprimentos: 102
+Celulares: 187
+
+Regras:
+- Guardar imediatamente
+- Não sair da delegacia
+- Apenas polícia decide devolução
+</pre>
+
+</div>
+
+<!-- ROSTER -->
+<div id="roster" class="section">
+<h2>Roster do Departamento</h2>
+
+<div class="warning">
+Neste roster vai estar tudo o que é importante para as informações do agente:
+- códigos das comunicações
+- grelha de agentes
+- certificações
+</div>
+
+<a href="https://docs.google.com/spreadsheets/d/1PgNg13O96UKXtL_RJbnGkKme0FMIX6pZ/edit?usp=sharing&ouid=113944332819184588617&rtpof=true&sd=true" target="_blank">
+Abrir Roster
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

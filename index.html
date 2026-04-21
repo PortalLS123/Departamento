@@ -1,151 +1,35 @@
 <!DOCTYPE html>
-
 <html lang="pt-PT">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal do Estado - San Andreas</title>
-
+<title>Portal do Estado de San Andreas</title>
 <style>
-body {
-    margin:0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(180deg,#07111f,#0b1b31);
-    color:white;
-}
-
-/* NAVBAR */
-nav {
-    background:#0b1b31;
-    padding:15px;
-    border-bottom:1px solid #d4af37;
-}
-
-nav a {
-    color:#d4af37;
-    margin-right:20px;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-/* HERO */
-header {
-    text-align:center;
-    padding:40px;
-}
-
-header img {
-    width:150px;
-}
-
-h1 {
-    font-size:40px;
-    margin-top:10px;
-}
-
-/* BOTÕES */
-.menu {
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-    margin:30px;
-}
-
-.card {
-    background:#122844;
-    padding:20px;
-    border-radius:15px;
-    width:250px;
-    border:1px solid #d4af37;
-    transition:0.2s;
-}
-
-.card:hover {
-    transform:scale(1.05);
-}
-
-.card a {
-    color:white;
-    text-decoration:none;
-    font-size:18px;
-    font-weight:bold;
-}
-
-/* SECÇÕES */
-section {
-    padding:30px;
-    max-width:900px;
-    margin:auto;
-}
-
-h2 {
-    border-bottom:2px solid #d4af37;
-    padding-bottom:5px;
-}
-
+:root{--bg:#06101d;--bg2:#0b1b31;--panel:rgba(9,22,40,.96);--line:rgba(255,255,255,.10);--gold:#d4af37;--gold2:#f1d47a;--text:#f8fbff;--muted:#c4d3e7;--muted2:#8ea3bf;--shadow:0 24px 60px rgba(0,0,0,.34)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:radial-gradient(circle at top, rgba(212,175,55,.12), transparent 18%),radial-gradient(circle at 85% 10%, rgba(255,255,255,.05), transparent 16%),linear-gradient(180deg,#040a14 0%,#091321 40%,#0b1727 100%)}
+.container{width:min(1280px,calc(100% - 32px));margin:0 auto}.topbar{position:sticky;top:0;z-index:50;background:rgba(4,9,18,.90);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 10px 24px rgba(0,0,0,.22)}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0}.brand{display:flex;align-items:center;gap:14px}.brand-badge{width:58px;height:58px;border-radius:50%;overflow:hidden;border:1px solid rgba(212,175,55,.35);background:rgba(255,255,255,.05);box-shadow:0 0 28px rgba(212,175,55,.14)}.brand-badge img{width:100%;height:100%;object-fit:cover}.brand h1{margin:0;font-size:1.35rem}.brand p{margin:4px 0 0;color:var(--muted);font-size:.92rem}
+.nav{display:flex;gap:10px;flex-wrap:wrap}.nav a{text-decoration:none;color:var(--text);padding:11px 16px;border-radius:999px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));font-weight:700;font-size:.92rem}
+.hero{padding:42px 0 24px}.hero-card{display:grid;grid-template-columns:320px 1fr;gap:30px;align-items:center;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:34px;padding:30px;box-shadow:var(--shadow)}.hero-crest{display:flex;align-items:center;justify-content:center;min-height:320px;padding:24px;border-radius:28px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02))}.hero-crest img{max-width:100%;width:260px;height:auto;display:block}.eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:.8rem;color:#d7e3f3;font-weight:800}.hero h2{margin:12px 0;font-size:clamp(2rem,4vw,3.2rem);line-height:1.05}.hero p{margin:0;max-width:760px;color:var(--muted);line-height:1.84;font-size:1rem}
+.portal-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:22px}.portal-btn{display:block;text-decoration:none;color:var(--text);background:linear-gradient(180deg,rgba(19,44,78,.96),rgba(9,22,40,.98));border:1px solid rgba(212,175,55,.24);border-radius:22px;padding:20px;min-height:155px;box-shadow:var(--shadow)}.portal-btn strong{display:block;font-size:1rem;margin-bottom:10px;color:#fff}.portal-btn span{color:var(--muted);font-size:.92rem;line-height:1.68}
+.layout{display:grid;grid-template-columns:300px 1fr;gap:22px;padding:18px 0 40px}.sidebar,.section,.notice,.roster-box{background:var(--panel);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow)}.sidebar{padding:20px;position:sticky;top:92px;height:fit-content}.sidebar h3{margin:0 0 12px;font-size:.8rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.24em}.sidebar a{display:block;text-decoration:none;color:var(--text);padding:11px 12px;border-radius:14px;margin-bottom:6px}.sidebar a:hover{background:rgba(255,255,255,.06)}
+.content{display:grid;gap:22px}.section{padding:26px}.section-title{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,.08)}.section-title h3{margin:8px 0 0;font-size:1.9rem}.kicker{text-transform:uppercase;letter-spacing:.24em;font-size:.8rem;color:#c6d7ec;font-weight:800}.badge{padding:10px 14px;border-radius:999px;border:1px solid rgba(212,175,55,.28);background:rgba(212,175,55,.10);color:var(--gold2);font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.18em;white-space:nowrap}.lead{color:var(--muted);line-height:1.84}
+.notice{padding:18px 20px;background:linear-gradient(180deg,rgba(212,175,55,.13),rgba(212,175,55,.05));border-color:rgba(212,175,55,.30)}.notice strong{display:block;margin-bottom:6px;color:#f6df8b}.notice p{margin:0;color:#f8fafc;line-height:1.72}
+.doc-box,.comunicado-card{margin-top:18px;padding:20px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.022))}.doc-box h4,.comunicado-card h4{margin:0 0 12px;font-size:1.08rem;color:#f3d474}.doc-box pre{white-space:pre-wrap;line-height:1.84;color:var(--muted);font-family:inherit;margin:0}.comunicado-card p{color:var(--muted);line-height:1.84}.roster-box{padding:22px;background:linear-gradient(180deg,rgba(18,39,67,.98),rgba(8,20,36,.98))}.roster-box a{display:inline-block;margin-top:14px;text-decoration:none;color:#08101b;background:linear-gradient(180deg,var(--gold2),var(--gold));font-weight:800;padding:12px 18px;border-radius:999px;box-shadow:0 12px 26px rgba(212,175,55,.22)}footer{padding:0 0 34px}.footer-box{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:24px;padding:18px;text-align:center;color:#cbd5e1}
+@media (max-width:1120px){.hero-card,.layout,.portal-grid{grid-template-columns:1fr}.sidebar{position:static}}@media (max-width:720px){.container{width:min(100% - 20px,1280px)}.topbar-inner{flex-direction:column;align-items:flex-start}.hero-crest img{width:220px}.section-title{flex-direction:column}}
 </style>
-
 </head>
 <body>
-
-<nav>
-    <a href="#comunicados">Comunicados</a>
-    <a href="#manual">Manual</a>
-    <a href="#dispatch">Dispatch</a>
-    <a href="#roster">Roster</a>
-</nav>
-
-<header>
-    <img src="badge-san-andreas.png">
-    <h1>Portal do Estado de San Andreas</h1>
-</header>
-
-<div class="menu">
-
-<div class="card">
-<a href="#comunicados">📢 Comunicados</a>
-</div>
-
-<div class="card">
-<a href="#manual">📘 Livro de Recurso</a>
-</div>
-
-<div class="card">
-<a href="#dispatch">📡 Procedimentos Dispatch</a>
-</div>
-
-<div class="card">
-<a href="#roster">📋 Roster do Departamento</a>
-</div>
-
-</div>
-
-<section id="comunicados">
-<h2>Comunicados</h2>
-<p>Área dedicada a avisos oficiais do departamento.</p>
-</section>
-
-<section id="manual">
-<h2>Livro de Recurso e Manual de Procedimentos</h2>
-<p>Aqui ficará todo o manual completo do departamento.</p>
-</section>
-
-<section id="dispatch">
-<h2>Procedimentos Operacionais do Dispatch</h2>
-<p>Manual completo do despachante policial.</p>
-</section>
-
-<section id="roster">
-<h2>Roster do Departamento</h2>
-
-<p><b>⚠️ Aviso:</b> Neste roster encontra-se toda a informação importante do agente, incluindo códigos de comunicação, grelha de agentes e certificações.</p>
-
-<a href="https://docs.google.com/spreadsheets/d/1PgNg13O96UKXtL_RJbnGkKme0FMIX6pZ/edit?usp=sharing" target="_blank">
-Abrir Roster
-</a>
-
-</section>
-
-</body>
-</html>
+<div class="topbar"><div class="container topbar-inner"><div class="brand"><div class="brand-badge"><img src="badge-san-andreas.png" alt="Emblema do Estado de San Andreas"></div><div><h1>Portal do Estado de San Andreas</h1><p>LSPD · BCSO · Comunicados · Procedimentos · Roster</p></div></div><nav class="nav"><a href="#comunicados">Comunicados</a><a href="#manual">Livro de Recurso</a><a href="#dispatch">Procedimentos Dispatch</a><a href="#roster">Roster</a></nav></div></div>
+<header class="hero"><div class="container"><div class="hero-card"><div class="hero-crest"><img src="badge-san-andreas.png" alt="Emblema LSPD e BCSO de San Andreas"></div><div><div class="eyebrow">Portal Institucional</div><h2>Departamento do Estado de San Andreas</h2><p>Portal interno com acesso rápido a comunicados oficiais, Livro de Recurso e Manual de Procedimentos, Procedimentos Operacionais do Dispatch da Polícia e rooster do departamento com códigos das comunicações, grelha de agentes e certificações.</p><div class="portal-grid"><a class="portal-btn" href="#comunicados"><strong>📢 Comunicados</strong><span>Área dedicada a avisos, ordens internas e informação relevante para todo o departamento.</span></a><a class="portal-btn" href="#manual"><strong>📘 Livro de Recurso e Manual de Procedimentos</strong><span>Acesso ao manual operacional geral do departamento, conduta, patrulha, força e procedimentos.</span></a><a class="portal-btn" href="#dispatch"><strong>📡 Procedimentos Operacionais do Dispatch da Polícia</strong><span>Manual completo do despachante policial, comunicações, relatórios, evidência e organização de serviço.</span></a><a class="portal-btn" href="#roster"><strong>📋 Roster do Departamento</strong><span>Consulta do rooster com códigos, grelha de agentes, certificações e informação importante do agente.</span></a></div></div></div></div></header>
+<main class="container layout"><aside class="sidebar"><h3>Navegação</h3><a href="#comunicados">Comunicados</a><a href="#manual">Livro de Recurso e Manual de Procedimentos</a><a href="#dispatch">Procedimentos Operacionais do Dispatch da Polícia</a><a href="#roster">Roster do Departamento</a></aside><div class="content">
+<section class="section" id="comunicados"><div class="section-title"><div><div class="kicker">Área Oficial</div><h3>Comunicados</h3></div><div class="badge">Uso Interno</div></div><p class="lead">Esta área destina-se à publicação de comunicados oficiais do departamento, ordens de serviço, avisos administrativos, alterações de procedimentos e informação interna relevante para LSPD e BCSO.</p><div class="comunicado-card"><h4>Comunicado Interno</h4><p>Área reservada à chefia para inserção de comunicados oficiais. Os comunicados podem incluir ordens operacionais, avisos disciplinares, atualizações de procedimentos, alterações de cadeia de comando, escalas e informação geral do departamento.</p></div></section>
+<section class="section" id="manual"><div class="section-title"><div><div class="kicker">Manual Geral</div><h3>Livro de Recurso e Manual de Procedimentos</h3></div><div class="badge">LSPD · BCSO</div></div><div class="doc-box"><h4>📘 Manual Operacional do Departamento</h4><pre>
+{manual_geral}
+</pre></div></section>
+<section class="section" id="dispatch"><div class="section-title"><div><div class="kicker">Manual Específico</div><h3>Procedimentos Operacionais do Dispatch da Polícia</h3></div><div class="badge">Confidencial</div></div><div class="notice"><strong>Aviso de Confidencialidade</strong><p>O presente documento não pode ser compartilhado em transmissões ao vivo, sites externos ou com quaisquer pessoas que não estejam trabalhando diretamente na Polícia da comunidade. Caso isso aconteça, o responsável estará sujeito a demissão imediata e ficará impedido de voltar a exercer qualquer função pública no servidor, sem exceções.</p></div><div class="doc-box"><h4>MANUAL DO DESPACHANTE POLICIAL</h4><pre>
+{manual_dispatch}
+</pre></div></section>
+<section class="section" id="roster"><div class="section-title"><div><div class="kicker">Consulta Externa</div><h3>Roster do Departamento</h3></div><div class="badge">Informação do Agente</div></div><div class="roster-box"><p class="lead">Neste rooster vai estar tudo o que é importante para as informações do agente, incluindo os códigos das comunicações, a grelha de agentes e as certificações.</p><a href="https://docs.google.com/spreadsheets/d/1PgNg13O96UKXtL_RJbnGkKme0FMIX6pZ/edit?usp=sharing&amp;ouid=113944332819184588617&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Abrir Roster do Departamento</a></div></section>
+</div></main><footer><div class="container"><div class="footer-box">Portal do Estado de San Andreas · LSPD · BCSO · Uso Institucional Interno</div></div></footer>
+</body></html>

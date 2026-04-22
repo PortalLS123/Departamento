@@ -1,95 +1,583 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-<meta charset="UTF-8">
-<title>Portal Polícia San Andreas</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Oficial do Estado - San Andreas</title>
 
-<style>
-body {
-    margin:0;
-    font-family: Arial;
-    background:#0b1220;
-    color:white;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
 
-header {
-    background:#020617;
-    padding:20px;
-    text-align:center;
-}
+  <style>
+    :root{
+      --bg:#030712;
+      --bg2:#071224;
+      --panel:rgba(8,15,28,.80);
+      --panel-strong:rgba(11,20,37,.94);
+      --line:rgba(255,255,255,.08);
+      --line-strong:rgba(255,255,255,.16);
+      --text:#f8fbff;
+      --muted:#97a9c4;
+      --blue:#3b82f6;
+      --blue2:#1d4ed8;
+      --blue3:#60a5fa;
+      --gold:#d4af37;
+      --danger:#991b1b;
+      --shadow:0 25px 60px rgba(0,0,0,.35);
+    }
 
-h1 {margin:0;}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
 
-.container {
-    padding:20px;
-}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.05), transparent 18%),
+        radial-gradient(circle at 20% 20%, rgba(59,130,246,.16), transparent 24%),
+        radial-gradient(circle at 85% 0%, rgba(255,255,255,.04), transparent 15%),
+        linear-gradient(180deg,#020617 0%,#06101d 40%,#091423 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
 
-button {
-    display:block;
-    width:100%;
-    margin:10px 0;
-    padding:15px;
-    font-size:16px;
-    background:#1e3a8a;
-    color:white;
-    border:none;
-    cursor:pointer;
-}
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(to right, rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size:38px 38px;
+      opacity:.20;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.45), transparent 88%);
+    }
 
-.section {
-    display:none;
-    margin-top:20px;
-    background:#020617;
-    padding:20px;
-}
+    /* LOGIN */
+    #loginScreen{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:
+        radial-gradient(circle at top, rgba(59,130,246,.22), transparent 25%),
+        linear-gradient(180deg, rgba(2,6,23,.96), rgba(2,6,23,.99));
+      z-index:999;
+    }
 
-.warning {
-    background:#7f1d1d;
-    padding:15px;
-    margin-bottom:20px;
-}
+    .login-shell{
+      width:min(520px,100%);
+      position:relative;
+    }
 
-a {
-    color:#60a5fa;
-}
-</style>
+    .login-shell::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:28px;
+      background:linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.03), rgba(96,165,250,.16));
+      z-index:0;
+    }
 
-<script>
-function openSection(id){
-    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
-    document.getElementById(id).style.display='block';
-}
-</script>
+    .login-card{
+      position:relative;
+      z-index:1;
+      background:linear-gradient(180deg, rgba(10,18,32,.97), rgba(8,14,26,.99));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:28px;
+      padding:34px;
+      box-shadow:0 0 40px rgba(255,255,255,.04), 0 0 80px rgba(37,99,235,.12), var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(18px);
+    }
 
+    .login-card::after{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      right:-70px;
+      top:-70px;
+      background:radial-gradient(circle, rgba(255,255,255,.11), transparent 66%);
+      filter:blur(8px);
+      pointer-events:none;
+    }
+
+    .login-badge{
+      width:84px;
+      height:84px;
+      border-radius:50%;
+      overflow:hidden;
+      margin:0 auto 18px;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 0 18px rgba(255,255,255,.10), 0 0 30px rgba(96,165,250,.14);
+      background:rgba(255,255,255,.04);
+    }
+
+    .login-badge img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .login-card h1{
+      margin:0;
+      text-align:center;
+      font-family:'Cinzel',serif;
+      font-size:1.7rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .login-card p{
+      margin:10px 0 26px;
+      text-align:center;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .login-label{
+      display:block;
+      font-size:.78rem;
+      margin-bottom:8px;
+      color:#d6e2f1;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-weight:700;
+    }
+
+    .login-input{
+      width:100%;
+      padding:15px 15px;
+      background:rgba(7,13,24,.92);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:14px;
+      color:white;
+      margin-bottom:14px;
+      outline:none;
+      transition:.18s ease;
+    }
+
+    .login-input:focus{
+      border-color:rgba(96,165,250,.55);
+      box-shadow:0 0 0 4px rgba(37,99,235,.14);
+    }
+
+    .login-btn{
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:14px;
+      font-weight:800;
+      letter-spacing:.02em;
+      background:linear-gradient(90deg,var(--blue2),var(--blue));
+      color:white;
+      cursor:pointer;
+      transition:.18s ease;
+      box-shadow:0 0 24px rgba(37,99,235,.28);
+    }
+
+    .login-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 0 30px rgba(255,255,255,.10),0 0 28px rgba(37,99,235,.36);
+    }
+
+    .login-note{
+      margin-top:15px;
+      font-size:.82rem;
+      color:#b9cdf0;
+      text-align:center;
+    }
+
+    /* APP */
+    .app-shell{
+      display:none;
+      min-height:100vh;
+    }
+
+    .sidebar{
+      position:fixed;
+      top:0;
+      left:0;
+      width:310px;
+      height:100vh;
+      background:rgba(4,9,18,.87);
+      backdrop-filter:blur(18px);
+      border-right:1px solid var(--line);
+      padding:22px 18px;
+      box-shadow:0 0 30px rgba(255,255,255,.03);
+      overflow:auto;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:24px;
+      padding-bottom:20px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .brand img{
+      width:58px;
+      height:58px;
+      border-radius:50%;
+      object-fit:cover;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 0 16px rgba(255,255,255,.08);
+    }
+
+    .brand h2{
+      margin:0;
+      font-size:1rem;
+      line-height:1.3;
+      font-family:'Cinzel',serif;
+    }
+
+    .brand span{
+      display:block;
+      color:var(--muted);
+      font-size:.8rem;
+      margin-top:3px;
+    }
+
+    .side-label{
+      font-size:.75rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:var(--muted);
+      margin:10px 8px 12px;
+      font-weight:700;
+    }
+
+    .side-btn{
+      width:100%;
+      text-align:left;
+      padding:15px 15px;
+      margin:9px 0;
+      font-size:15px;
+      color:white;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:15px;
+      cursor:pointer;
+      transition:.2s ease;
+      font-family:'Inter',sans-serif;
+    }
+
+    .side-btn:hover,
+    .side-btn.active{
+      transform:translateX(4px);
+      border-color:rgba(96,165,250,.42);
+      background:linear-gradient(180deg, rgba(59,130,246,.18), rgba(255,255,255,.03));
+      box-shadow:0 0 20px rgba(255,255,255,.05), 0 0 18px rgba(37,99,235,.18);
+    }
+
+    .side-footer{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:.78rem;
+      line-height:1.55;
+      border-top:1px solid var(--line);
+      padding-top:14px;
+    }
+
+    .main{
+      margin-left:310px;
+      padding:28px;
+    }
+
+    .topbar{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:0 0 18px rgba(255,255,255,.03);
+      margin-bottom:22px;
+      backdrop-filter:blur(12px);
+    }
+
+    .topbar h1{
+      margin:0;
+      font-family:'Cinzel',serif;
+      font-size:2rem;
+      letter-spacing:.02em;
+    }
+
+    .topbar p{
+      margin:7px 0 0;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .hero-cards{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+      margin-bottom:22px;
+    }
+
+    .hero-card-box{
+      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 0 16px rgba(255,255,255,.02);
+      backdrop-filter:blur(8px);
+    }
+
+    .hero-card-box strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:1rem;
+    }
+
+    .hero-card-box span{
+      color:var(--muted);
+      font-size:.9rem;
+      line-height:1.6;
+    }
+
+    .section{
+      display:none;
+      background:rgba(5,11,21,.78);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:24px;
+      box-shadow:0 0 22px rgba(255,255,255,.03), var(--shadow);
+      animation:fade .35s ease;
+      backdrop-filter:blur(12px);
+    }
+
+    .section.active{
+      display:block;
+    }
+
+    @keyframes fade{
+      from{opacity:0;transform:translateY(8px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .section h2{
+      margin-top:0;
+      font-size:1.6rem;
+      margin-bottom:14px;
+      font-family:'Cinzel',serif;
+    }
+
+    .warning{
+      background:linear-gradient(90deg,#7f1d1d,#991b1b);
+      padding:16px;
+      margin-bottom:20px;
+      border-radius:14px;
+      box-shadow:0 0 16px rgba(255,0,0,.12);
+      border:1px solid rgba(255,255,255,.08);
+      line-height:1.65;
+    }
+
+    .notice{
+      background:linear-gradient(90deg, rgba(37,99,235,.18), rgba(255,255,255,.04));
+      border:1px solid rgba(96,165,250,.22);
+      padding:16px;
+      margin-bottom:18px;
+      border-radius:14px;
+      line-height:1.7;
+    }
+
+    .doc-content{
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:25px;
+      line-height:1.85;
+      font-size:14px;
+      color:#dbeafe;
+      box-shadow:0 0 20px rgba(255,255,255,0.03);
+    }
+
+    .doc-content pre{
+      white-space:pre-wrap;
+      line-height:1.75;
+      font-size:14px;
+      font-family:'Inter',sans-serif;
+      background:transparent;
+      padding:0;
+      border:none;
+      box-shadow:none;
+      margin:0;
+      color:#dbeafe;
+    }
+
+    .link-btn{
+      display:inline-block;
+      padding:13px 18px;
+      background:linear-gradient(90deg,var(--blue2),var(--blue));
+      color:white;
+      text-decoration:none;
+      border-radius:12px;
+      font-weight:800;
+      box-shadow:0 0 18px rgba(37,99,235,.24);
+      transition:.18s ease;
+    }
+
+    .link-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 0 24px rgba(255,255,255,.08), 0 0 22px rgba(37,99,235,.28);
+    }
+
+    @media (max-width:1100px){
+      .hero-cards{grid-template-columns:1fr 1fr}
+    }
+
+    @media (max-width:920px){
+      .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+      }
+      .main{
+        margin-left:0;
+      }
+    }
+
+    @media (max-width:640px){
+      .hero-cards{grid-template-columns:1fr}
+      .main{padding:16px}
+      .login-card{padding:24px}
+    }
+  </style>
+
+  <script>
+    let soundEnabled = true;
+
+    function playClickSound(){
+      if(!soundEnabled) return;
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if(!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(620, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(430, ctx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.04, ctx.currentTime + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.12);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.13);
+    }
+
+    function openSection(id, btn){
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      if(btn) btn.classList.add('active');
+      playClickSound();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function enterPortal(){
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('appShell').style.display = 'block';
+      const firstBtn = document.querySelector('.side-btn');
+      openSection('comunicados', firstBtn);
+    }
+  </script>
 </head>
-
 <body>
 
-<header>
-<h1>Portal da Polícia</h1>
-</header>
+  <div id="loginScreen">
+    <div class="login-shell">
+      <div class="login-card">
+        <div class="login-badge">
+          <img src="badge-san-andreas.png" alt="Emblema do Estado">
+        </div>
+        <h1>Portal Governamental</h1>
+        <p>Sistema Interno de Acesso Restrito<br>Departamento de Polícia de San Andreas</p>
 
-<div class="container">
+        <label class="login-label">Identificação Governamental</label>
+        <input class="login-input" type="text" placeholder="Introduza o seu identificador institucional">
 
-<button onclick="openSection('comunicados')">Comunicados</button>
-<button onclick="openSection('manual')">Livro de Recurso e Manual</button>
-<button onclick="openSection('dispatch')">Procedimentos Dispatch</button>
-<button onclick="openSection('roster')">Roster do Departamento</button>
+        <label class="login-label">Código de Acesso</label>
+        <input class="login-input" type="password" placeholder="Introduza o código de acesso">
 
-<!-- COMUNICADOS -->
-<div id="comunicados" class="section">
-<h2>Comunicados</h2>
-<p>Sem comunicados de momento.</p>
-</div>
+        <button class="login-btn" onclick="enterPortal()">Aceder ao Sistema Interno</button>
+        <div class="login-note">Interface visual institucional · acesso ilustrativo</div>
+      </div>
+    </div>
+  </div>
 
-<!-- MANUAL -->
-<div id="manual" class="section">
-<h2>Livro de Recurso e Manual de Procedimentos</h2>
-<pre>
-📘 MANUAL OPERACIONAL DO DEPARTAMENTO
+  <div id="appShell" class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="badge-san-andreas.png" alt="Emblema">
+        <div>
+          <h2>Portal do Estado</h2>
+          <span>Polícia de San Andreas</span>
+        </div>
+      </div>
 
-(ESTÁ TUDO INCLUÍDO — texto longo exatamente como enviaste)
+      <div class="side-label">Módulos do Sistema</div>
+      <button class="side-btn" onclick="openSection('comunicados', this)">📢 Comunicados</button>
+      <button class="side-btn" onclick="openSection('manual', this)">📘 Livro de Recurso e Manual de Procedimentos</button>
+      <button class="side-btn" onclick="openSection('dispatch', this)">📡 Procedimentos Operacionais do Dispatch da Polícia</button>
+      <button class="side-btn" onclick="openSection('roster', this)">📋 Roster do Departamento</button>
 
+      <div class="side-footer">
+        Sistema Institucional Interno<br>
+        Estado de San Andreas<br>
+        Interface oficial de consulta
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <h1>Portal Oficial do Estado</h1>
+        <p>Ambiente interno de consulta documental, organização operacional e acesso aos módulos institucionais do departamento.</p>
+      </div>
+
+      <div class="hero-cards">
+        <div class="hero-card-box">
+          <strong>Comunicados</strong>
+          <span>Área reservada a ordens, avisos e atualizações institucionais.</span>
+        </div>
+        <div class="hero-card-box">
+          <strong>Manual</strong>
+          <span>Livro de recurso e manual de procedimentos do departamento.</span>
+        </div>
+        <div class="hero-card-box">
+          <strong>Dispatch</strong>
+          <span>Procedimentos operacionais completos do despacho policial.</span>
+        </div>
+        <div class="hero-card-box">
+          <strong>Roster</strong>
+          <span>Códigos, grelha de agentes, certificações e dados operacionais.</span>
+        </div>
+      </div>
+
+      <section id="comunicados" class="section">
+        <h2>📢 Comunicados Oficiais</h2>
+        <div class="notice">
+          Área reservada a comunicados internos, atualizações, ordens institucionais e informação oficial do departamento.
+        </div>
+        <p>Sem comunicados de momento.</p>
+      </section>
+
+      <section id="manual" class="section">
+        <h2>📘 Livro de Recurso e Manual de Procedimentos</h2>
+        <div class="notice">
+          Módulo documental principal com organização, conduta, patrulha, força, prisão, negociação e procedimentos internos.
+        </div>
+
+        <div class="doc-content">
+          <pre>
 📘 MANUAL OPERACIONAL DO DEPARTAMENTO
 
 🏛️ ESTRUTURA DE PATENTES
@@ -358,25 +846,23 @@ Deve atuar com:
 Garantindo:
 - Segurança da população
 - Cumprimento da lei
-</pre>
-</div>
+          </pre>
+        </div>
+      </section>
 
-<!-- DISPATCH -->
-<div id="dispatch" class="section">
+      <section id="dispatch" class="section">
+        <div class="warning">
+          ⚠️ AVISO DE CONFIDENCIALIDADE
+          <br><br>
+          O presente documento não pode ser compartilhado em transmissões ao vivo, sites externos ou com quaisquer pessoas que não estejam trabalhando diretamente na Polícia da comunidade.
+          <br><br>
+          Caso isso aconteça, o responsável estará sujeito a demissão imediata e ficará impedido de voltar a exercer qualquer função pública no servidor, sem exceções.
+        </div>
 
-<div class="warning">
-AVISO DE CONFIDENCIALIDADE
+        <h2>📡 Procedimentos Operacionais do Dispatch da Polícia</h2>
 
-O presente documento não pode ser compartilhado em transmissões ao vivo, sites externos ou com quaisquer pessoas que não estejam trabalhando diretamente na Polícia da comunidade.
-
-Caso isso aconteça, o responsável estará sujeito a demissão imediata.
-</div>
-
-<pre>
-MANUAL DO DESPACHANTE POLICIAL
-
-(ESTÁ TUDO INCLUÍDO — texto completo que mandaste)
-
+        <div class="doc-content">
+          <pre>
 1.2 Assistentes Administrativos
 
 Compete aos assistentes administrativos:
@@ -612,28 +1098,27 @@ Regras:
 - Guardar imediatamente
 - Não sair da delegacia
 - Apenas polícia decide devolução
-</pre>
+          </pre>
+        </div>
+      </section>
 
-</div>
+      <section id="roster" class="section">
+        <h2>📋 Roster do Departamento</h2>
+        <div class="warning">
+          ⚠️ IMPORTANTE
+          <br><br>
+          Neste roster vai estar tudo o que é importante para as informações do agente:
+          <br>- códigos das comunicações
+          <br>- grelha de agentes
+          <br>- certificações
+        </div>
 
-<!-- ROSTER -->
-<div id="roster" class="section">
-<h2>Roster do Departamento</h2>
-
-<div class="warning">
-Neste roster vai estar tudo o que é importante para as informações do agente:
-- códigos das comunicações
-- grelha de agentes
-- certificações
-</div>
-
-<a href="https://docs.google.com/spreadsheets/d/1PgNg13O96UKXtL_RJbnGkKme0FMIX6pZ/edit?usp=sharing&ouid=113944332819184588617&rtpof=true&sd=true" target="_blank">
-Abrir Roster
-</a>
-
-</div>
-
-</div>
+        <a class="link-btn" href="https://docs.google.com/spreadsheets/d/1PgNg13O96UKXtL_RJbnGkKme0FMIX6pZ/edit?usp=sharing&ouid=113944332819184588617&rtpof=true&sd=true" target="_blank">
+          Abrir Roster Oficial
+        </a>
+      </section>
+    </main>
+  </div>
 
 </body>
 </html>
